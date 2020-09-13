@@ -12,13 +12,25 @@ if(empty($_POST) === false){
     }else if(user_active($username) == 0){
         $errors[] = 'You have not activated your account';
     }else{
+
         $login = login($username, $password);
         if($login === false){
             $errors[] = 'That username or password combination is incorrect';
         }else{
-
+            $_SESSION['user_id'] = $login;
+            header('Location: index.php' );
+            exit();
         }
     }
-    print_r($errors);
+}else{
+    $errors[] = 'No data received';
 }
+include 'includes/overall/header.php'; 
+if(empty($errors) === false){
+    echo '<h2> We tried to log you in,but...</h2>';
+    echo output_errors($errors);
+
+}
+include 'includes/overall/footer.php'; 
+
 ?>
