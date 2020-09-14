@@ -42,7 +42,14 @@ if(empty($_POST) === false){
 
 <?php
 if(empty($_POST) === false && empty($errors) === true){
-    
+    $register_data = array(
+        'username' => $_POST['username'],
+        'password' => $_POST['password'],
+        'firstname' => $_POST['firstname'],
+        'lastname' => $_POST['lastname'],
+        'email' => $_POST['email']
+    );
+    register_user($register_data);
 }else{
     echo output_errors($errors);
 }

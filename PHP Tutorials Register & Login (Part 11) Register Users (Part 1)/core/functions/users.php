@@ -1,5 +1,15 @@
 <?php
+function register_user($register_data){
+    $link = mysqli_connect('localhost', 'root', '', 'a_database1');
 
+    array_walk($register_data, 'array_sanitize');
+    $register_data['password'] = md5($register_data['password']);
+
+    $fields = '`'. implode('`, `', array_keys($register_data)) . '`';
+    $data = '\''. implode('\', \'', $register_data) . '\'';
+
+    
+}
 function user_count(){
     $link = mysqli_connect('localhost', 'root', '', 'a_database1');
 
